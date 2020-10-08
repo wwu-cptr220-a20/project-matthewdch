@@ -16,8 +16,7 @@ header h1 {
     display: inline-block;
     margin: 0 0 0 20px;
 }
-nav{
-    display: inline-block;  
+nav{  
     padding-top: 5px;   
     float: right;
  }
