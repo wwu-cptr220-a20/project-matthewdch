@@ -17,54 +17,62 @@
         <h1>The Game Shelf</h1>
         <nav>
             <a href="index.html" type="button" class="btn btn-dark">Home</a>
-            <a href="info.html"type="button" class="btn btn-dark">About</a>
-            <a href="info.html#Stats"type="button" class="btn btn-dark">Stats</a>
-            <a href="catalog.html"type="button" class="btn btn-dark">Catalog</a>
+            <a href="info.html" type="button" class="btn btn-dark">About</a>
+            <a href="info.html#Stats" type="button" class="btn btn-dark">Stats</a>
+            <a href="catalog.html" type="button" class="btn btn-dark">Catalog</a>
         </nav>
     </header>
 <main>
-    <h3>Games you own</h1>
+    <h3>Games you own</h3>
     <table>
         <thead>
              <tr>
-                 <th>Rating</th>
-                 <th>Game</th>
-                 <th>Win Ratio</th>
-                 <th>Image</th>
+                <th>Rating</th>
+                <th>Game</th>
+                <th>Win Ratio</th>
+                <th>Image</th>
              </tr>
          </thead>
          <tbody>
              <tr>
-                 <td>3.5</td>
-                 <td>Monopoly</td>
-                 <td>50W/0L</td>
-                 <td>
-                    <img class="game_photo" src="img/monopoly.jpg" alt="monopoly">
-                 </td>
+                <td>3.5</td>
+                <td>Monopoly</td>
+                <td>50W/0L</td>
+                <td>
+                <img class="game_photo" src="img/monopoly.jpg" alt="monopoly">
+                </td>
              </tr>
              <tr>
-                 <td>3</td>
-                 <td>Uno</td>
-                 <td>1W/600L</td>
-                 <td>
-                    <img class="game_photo" src="img/uno.jpg" alt="uno">
-                 </td>
+                <td>3</td>
+                <td>Uno</td>
+                <td>1W/600L</td>
+                <td>
+                <img class="game_photo" src="img/uno.jpg" alt="uno">
+                </td>
              </tr>
              <tr>
-                 <td>5</td>
-                 <td>What do you Meme?</td>
-                 <td>?W/?L</td>
-                 <td>
+                <td>5</td>
+                <td>What do you Meme?</td>
+                <td>?W/?L</td>
+                <td>
                     <img class="game_photo" src="img/wdym.jpg" alt="wdym">
-                 </td>        
+                </td>        
              </tr>
              <tr>
-                 <td>4</td>
-                 <td>Villainous</td>
-                 <td>25W/2L</td>
-                 <td>
+                <td>4</td>
+                <td>Villainous</td>
+                <td>25W/2L</td>
+                <td>
                     <img class="game_photo" src="img/villainous.jpg" alt="Villainous"> 
-                 </td>
+                </td>
+             </tr>
+             <tr>
+                <td><input type="text" id="ratingInput" name="rating"></td>
+                <td><input type="text" id="gameInput" name="gmae"></td>
+                <td><input type="text" id="ratioInput" name="ratio"></td>
+                <td>
+                    <input type="text" id="imageInput" name="image">
+                </td>
              </tr>
              
          </tbody>
