@@ -1,10 +1,9 @@
 html {
     height: 100%;
-    background-color: rgb(46, 42, 42);
 }
 body{
     
-    background: radial-gradient(rgb(53, 51, 51),black);
+    background: radial-gradient(rgb(53, 51, 51), #363636);
 }
 @media (min-width: 1000px) {
     body {
@@ -95,4 +94,7 @@ tbody tr:hover{
 .game_photo {
     width: 100px;
     height: 100px;
+}
+.fa-trash-o{
+    font-size:28px
 }

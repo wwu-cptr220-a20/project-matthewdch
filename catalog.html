@@ -9,7 +9,7 @@
     <link rel="Stylesheet" href="css/style.css">
     <link rel="Stylesheet" href="https://yarnpkg.com/en/package/normalize.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="img/icon.png">
 </head>
 <body>
@@ -17,61 +17,75 @@
         <h1>The Game Shelf</h1>
         <nav>
             <a href="index.html" type="button" class="btn btn-dark">Home</a>
-            <a href="info.html"type="button" class="btn btn-dark">About</a>
-            <a href="info.html#Stats"type="button" class="btn btn-dark">Stats</a>
-            <a href="catalog.html"type="button" class="btn btn-dark">Catalog</a>
+            <a href="info.html" type="button" class="btn btn-dark">About</a>
+            <a href="info.html#Stats" type="button" class="btn btn-dark">Stats</a>
+            <a href="catalog.html" type="button" class="btn btn-dark">Catalog</a>
         </nav>
     </header>
 <main>
-    <h3>Games you own</h1>
+    <h3>Games you own</h3>
     <table>
         <thead>
              <tr>
-                 <th>Rating</th>
-                 <th>Game</th>
-                 <th>Win Ratio</th>
-                 <th>Image</th>
+                <th>Rating</th>
+                <th>Game</th>
+                <th>Win Ratio</th>
+                <th>Image</th>
+                <th>Changes</th>
              </tr>
          </thead>
          <tbody>
-             <tr>
-                 <td>3.5</td>
-                 <td>Monopoly</td>
-                 <td>50W/0L</td>
-                 <td>
+             <tr  class="mainrows">
+                <td>3.5</td>
+                <td>Monopoly</td>
+                <td>50W/0L</td>
+                <td>
                     <img class="game_photo" src="img/monopoly.jpg" alt="monopoly">
-                 </td>
+                </td>
+                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
              </tr>
-             <tr>
-                 <td>3</td>
-                 <td>Uno</td>
-                 <td>1W/600L</td>
-                 <td>
+             <tr  class="mainrows">
+                <td>3</td>
+                <td>Uno</td>
+                <td>1W/600L</td>
+                <td>
                     <img class="game_photo" src="img/uno.jpg" alt="uno">
-                 </td>
+                </td>
+                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
              </tr>
-             <tr>
-                 <td>5</td>
-                 <td>What do you Meme?</td>
-                 <td>?W/?L</td>
-                 <td>
+             <tr  class="mainrows">
+                <td>5</td>
+                <td>What do you Meme?</td>
+                <td>?W/?L</td>
+                <td>
                     <img class="game_photo" src="img/wdym.jpg" alt="wdym">
-                 </td>        
+                </td>
+                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
+             </tr>
+             <tr class="mainrows">
+                <td>4</td>
+                <td>Villainous</td>
+                <td>25W/2L</td>
+                <td>
+                    <img class="game_photo" src="img/villainous.jpg" alt="Villainous">
+                </td>
+                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
              </tr>
              <tr>
-                 <td>4</td>
-                 <td>Villainous</td>
-                 <td>25W/2L</td>
-                 <td>
-                    <img class="game_photo" src="img/villainous.jpg" alt="Villainous"> 
-                 </td>
+                <td><input type="text" id="ratingInput" name="rating"></td>
+                <td><input type="text" id="gameInput" name="gmae"></td>
+                <td><input type="text" id="ratioInput" name="ratio"></td>
+                <td><input type="text" id="imageInput" name="image"></td>
+                <td><button type="button" id="submit">Submit</button></td>
              </tr>
-             
          </tbody>
     </table>
 </main>
 <footer>
     <p>&#169;Matthew DeChance, 2020</p>
 </footer>
+<!-- JS FILE LINK-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="js/catalog.js"></script>
 </body>
 </html>
