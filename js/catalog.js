@@ -8,7 +8,7 @@ var ratingInput = document.querySelector("#ratingInput");
 var gameInput = document.querySelector("#gameInput");
 var ratioInput = document.querySelector("#ratioInput");
 var imageInput = document.querySelector("#imageInput");
-
+var submit = document.querySelector("#submit");
 function createRow() {
     let newRow = document.createElement("tr")
     for(let i = 0; i < 4; i++) {
@@ -46,4 +46,6 @@ var last  = document.querySelector('tbody tr:last-child');
 last.append(createRow());
 }
 
-appendRow();
+
+
+submit.addEventListener('click', appendRow);
