@@ -16,23 +16,24 @@ function createRow() {
         switch(i) {
             case 0:
 
-            newCell.textContent = ratingInput.textContent;
-
+            newCell.textContent = ratingInput.value;
+            newRow.append(newCell);
             break;
             case 1:
 
-            newCell.textContent = gameInput.textContent;
-
+            newCell.textContent = gameInput.value;
+            newRow.append(newCell);
             break;
             case 2:
 
-             newCell.textContent = ratioInput.textContent;
-
+             newCell.textContent = ratioInput.value;
+             newRow.append(newCell);
             break;
             case 3:
             let newImg = document.createElement("img");
-            newImg.baseURI = imageInput.textContent;
+            newImg.src = imageInput.value;
             newCell.append(newImg);
+            newRow.append(newCell);
             break;
         }
     }
@@ -42,8 +43,10 @@ function createRow() {
 }
 
 function appendRow() {
-var last  = document.querySelector('tbody tr:last-child');
+    console.log("Ran");
+var last  = document.querySelector('tbody');
 last.append(createRow());
+console.log(last);
 }
 
 
