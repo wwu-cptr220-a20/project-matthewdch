@@ -25,27 +25,28 @@
 </header>
 <main>
     <section>
-        <h3>Topic Overview</h3>
-        <p>This project serves to be able to keep track of your board games.
-            It will be something that you can show your friends to see what they want to play, you can keep track of wins/losses.
-            Check the weather to see if its a good day to stay inside and play, or even find related games that you might want to get.</p>
+    <!-- Music Form Code got from Problem Set 06 -->
+    <h1>
+        Listen to some tunes!
+        <i class="d-none fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </h1>
+    <form class="form-inline" method="GET" action="https://itunes.apple.com/search">
+        <div class="form-group mr-3">
+          <input type="text" name="term" id="searchQuery" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-music" aria-hidden="true"></i> Search!
+        </button>
+        <input type="hidden" name="entity" value="song">
+    </form>
+    <div id="records" class="center">
+    </div>
     </section>
-    <section>
-        <h3>Potential Applications</h3>
-        <ul>
-            <li>Have weather avaiable on screen.</li>
-            <li>Inventory your current board games and make notes for missing pieces, etc.</li>
-            <li>Track wins/losses</li>
-        </ul>
-    </section>
-    <section>
-        <h3>Useful Info to look into</h3>
-        <ul>
-            <li><a href= "https://openweathermap.org/api"> Weather API</a></li>
-            <li><a href= "https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Track_the_score_and_win">Score tracking</a></li>
-            <li><a href= "https://www.creativebloq.com/features/best-html-apis">Other maybe useful apis</a></li>
-        </ul>
-    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="js/music.js"></script>
+
 </main>
 <footer>
     <p>&#169;Matthew DeChance, 2020</p>
