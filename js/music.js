@@ -4,8 +4,8 @@ function renderTrack(song) {
     track.alt = song.trackName;
     track.title = song.trackName;
     track.addEventListener('click', function() {
-        playTrackPreview(song, songTile);
-      });
+        playTrackPreview(song, track);
+    });
   
     document.querySelector("#records").appendChild(track);
 }
@@ -55,6 +55,7 @@ function toggleSpinner() {
 }
 
 //Function got from problem 06
+const state = { previewAudio: new Audio() };
 function playTrackPreview(track, img) {
     if(state.previewAudio.src !== track.previewUrl){ //if a new track to play
       document.querySelectorAll('img').forEach(function(element){
