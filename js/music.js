@@ -58,14 +58,10 @@ function toggleSpinner() {
 const state = { previewAudio: new Audio() };
 function playTrackPreview(track, img) {
     if(state.previewAudio.src !== track.previewUrl){ //if a new track to play
-      document.querySelectorAll('img').forEach(function(element){
-        element.classList.remove('fa-spin');
-      }); //stop whoever else is spinning
   
       state.previewAudio.pause(); //pause current
       state.previewAudio = new Audio(track.previewUrl); //create new audio
       state.previewAudio.play(); //play new
-      img.classList.add('fa-spin'); //start the spinning
     } 
     else {
       if(state.previewAudio.paused){ 
@@ -73,6 +69,5 @@ function playTrackPreview(track, img) {
       } else {
         state.previewAudio.pause();
       }
-      img.classList.toggle('fa-spin'); //toggle the spinning
     }
 }
