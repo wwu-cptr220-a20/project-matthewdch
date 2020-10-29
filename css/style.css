@@ -100,5 +100,13 @@ tbody tr:hover{
     height: 100px;
 }
 .fa-trash-o{
-    font-size:28px
+    font-size:28px;
+}
+.form-group {
+    padding-left: 15px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
