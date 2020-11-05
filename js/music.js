@@ -56,7 +56,7 @@ function toggleSpinner() {
 
 //Function got from problem 06
 const state = { previewAudio: new Audio() };
-function playTrackPreview(track, img) {
+function playTrackPreview(track) {
     if(state.previewAudio.src !== track.previewUrl){ //if a new track to play
   
       state.previewAudio.pause(); //pause current

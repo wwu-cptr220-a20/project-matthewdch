@@ -20,7 +20,7 @@ describe('Source code is valid', () => {
       'img-req-alt':true
     }
 
-    const htmlfiles = fs.readdirSync(__dirname).filter((f) => f.endsWith('.html'));
+    const htmlfiles = fs.readdirSync(__dirname).filter((f) => f.endsWith('index.html'));
     for(let f of htmlfiles) {
       await expect(f).toHaveNoHtmlLintErrorsAsync(lintOpts);
     }
