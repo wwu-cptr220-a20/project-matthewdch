@@ -19,14 +19,16 @@ let state = {
 // Create the visible elements
 function createGameElement(game, id) {
     let newGame = document.createElement('tr');
-
+    newGame.classList.add("text-dark");
     let th = document.createElement('th');
     th.scope = "row";
     th.textContent = id;
+    
     newGame.appendChild(th);
 
     let tr1 = document.createElement('td');
     tr1.textContent = game.name;
+    
     newGame.appendChild(tr1);
 
     let tr2 = document.createElement('td');
@@ -40,6 +42,7 @@ function createGameElement(game, id) {
         }
         renderGameTable();
     });
+    
     newGame.appendChild(tr2);
     
     return newGame;
@@ -142,7 +145,7 @@ function createResultElement(game, id) {
     }
     td2.appendChild(check);
     newGame.appendChild(td2);
-
+    
     return newGame;
 }
 
