@@ -61,7 +61,26 @@ describe('Source code is valid', () => {
     expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
   });
 
-  test('Rate game', () => {
+});
+
+describe('Content and HTML tests', () => {
+  test('H1 element has correct text', () => {
+    expect($('h1').text()).toMatch("The Game Shelf");//
+  })
+  test('Links have correct classes', () => {
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
+});
+
+describe('Style and CSS tests', () => {
+  test('Header has a background color', () => {
+    let header = $('header');
+    expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
+  }) 
+});
+
+describe('Interactive and Javascript tests', () => {
+  test('Add game manually', () => {
     const htmlPath = __dirname + '/catalog.html';
     const html = fs.readFileSync(htmlPath, 'utf-8');
     document.documentElement.innerHTML = html;
@@ -72,22 +91,7 @@ describe('Source code is valid', () => {
     $('#boardGameInput')[0].dispatchEvent(new Event('input'));
     $('#submit-button').click();
 
-    let ratingElement = $('#game-list tr td');
-    let oldRating = ratingElement.text;
-    ratingElement.click();
-    expect(oldRating[0] < ratingElement.text[0]);
+    expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
   });
 
-  test('H1 element has correct text', () => {
-    expect($('h1').text()).toMatch("The Game Shelf");//
-  })
-
-  test('Links have correct classes', () => {
-    expect($('a').hasClass('btn btn-dark')).toBe(true);
-  })
 });
-
-test('Header has a background color', () => {
-  let header = $('header');
-  expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
-})
