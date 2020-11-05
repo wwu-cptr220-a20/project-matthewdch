@@ -47,53 +47,109 @@ describe('Source code is valid', () => {
     }
   })
 
-  test('Search feature returns list of appropriate games', () => {
-    const html = fs.readFileSync('./catalog.html', 'utf-8');
-    document.documentElement.innerHTML = html;
-    const catalog = require('./js/catalog.js');
+});
 
-    const firstFiveExpectedResults = [
-      {name: 'Catan', selected: false},
-      {name: 'Catan: 5-6 Player Extension', selected: false},
-      {name: 'Catan: Cities & Knights', selected: false},
-      {name: 'Catan Card Game', selected: false},
-      {name: 'Rivals for Catan', selected: false},
-    ]
-    document.querySelector('#search-modal-open-button').click();
-    document.querySelector('#searchInput').value = 'Catan';
-    document.querySelector('#searchInput').dispatchEvent(new Event('input'));
-    document.querySelector('#search-button').click();
-
-    for(let i = 0; i < 5; i++) {
-      expect(firstFiveExpectedResults[i] == catalog.state.searchResults[i]);
-    }
-
-  })
-
-  // test('Add game through search feature', () => {
-  //   const catalog = require('./js/catalog.js');
-
-  //   document.querySelector('#search-modal-open-button').click();
-  //   $('#searchInput').val('Catan');
-  //   $('#searchInput').dispatchEvent(new Event('input'));
-  //   $('#search-button').click();
-  //   $('.far')[0].click();
-  //   $('#search-submit-button').click();
-
-  //   expect(catalog.state.searchResults.includes({name: 'Catan', selected: false}));
-
-  // })
-
+describe('Content and HTML tests', () => {
   test('H1 element has correct text', () => {
     expect($('h1').text()).toMatch("The Game Shelf");//
   })
-
   test('Links have correct classes', () => {
     expect($('a').hasClass('btn btn-dark')).toBe(true);
   })
+  test('Footer has correct text', () => {
+    expect($('footer').text()).toMatch("Matthew DeChance, 2020");
+  })
+  test('Main has apporpriate sections', () => {
+    let mainSections = $('main').children();
+    expect(mainSections.length).toEqual(3);
+  })
 });
 
-test('Header has a background color', () => {
-  let header = $('header');
-  expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
-})
+describe('Style and CSS tests', () => {
+  //CSS test
+  test('Links have correct classes', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
+
+  //CSS test
+  test('Section has correct class', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('section').hasClass('content')).toBe(true);
+  })
+
+  test('Div has correct class', () => {
+    expect($('div').hasClass('container mt-4 mb-4')).toBe(true);
+  })
+
+  test('Input has correct class', () => {
+    expect($('input').hasClass('form-control')).toBe(true);
+  })
+});
+
+describe('Interactive and Javascript tests', () => {
+  test('Add game manually', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
+
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
+  });
+
+  test('Rate game', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
+
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    let ratingElement = $('#game-list tr td:nth-child(1)');
+    let oldRating = ratingElement.text;
+    ratingElement.click();
+    expect(oldRating[0] < ratingElement.text[0]);
+  });
+
+  test('Delete game', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
+
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    let oldSize = catalog.state.games.length;
+
+    $('#game-list tr td:nth-child(2)').click();
+
+    expect(catalog.state.games.length < oldSize);
+
+  });
+
+  test('Open search menu', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+
+    $('search-modal-open-button').click();
+    expect($('searchModal').style == 'display: block');
+  })
+});
+
+
