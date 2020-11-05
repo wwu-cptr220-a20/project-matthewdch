@@ -75,6 +75,13 @@ describe('Style and CSS tests', () => {
     expect($('section').hasClass('content')).toBe(true);
   })
 
+  test('Div has correct class', () => {
+    expect($('div').hasClass('container mt-4 mb-4')).toBe(true);
+  })
+
+  test('Input has correct class', () => {
+    expect($('input').hasClass('form-control')).toBe(true);
+  })
 });
 
 describe('Interactive and Javascript tests', () => {
