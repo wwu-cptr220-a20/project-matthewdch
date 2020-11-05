@@ -98,7 +98,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 // Search button click listener
 document.getElementById('search-button').addEventListener('click', function() {
     state.searchResults = [];
-    getResults();
+    getResults().then(() => renderSearchTable());
 })
 
 // Submit button click listener
@@ -178,7 +178,7 @@ function getResults() {
     }).then((json) =>{
         json.games.forEach((game) => {state.searchResults.push({name: game.name, selected: false})});
         
-    }).then(() => renderSearchTable());
+    });
 }
 
 // Adds selected games to collection
