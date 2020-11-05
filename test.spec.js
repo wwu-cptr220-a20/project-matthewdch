@@ -47,20 +47,6 @@ describe('Source code is valid', () => {
     }
   })
 
-  test('Add game manually', () => {
-    const htmlPath = __dirname + '/catalog.html';
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    document.documentElement.innerHTML = html;
-    const jsPath = __dirname + '/js/catalog.js';
-    const catalog = require(jsPath);
-
-    $('#boardGameInput').val('Catan');
-    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
-    $('#submit-button').click();
-
-    expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
-  });
-
 });
 
 describe('Content and HTML tests', () => {
@@ -88,6 +74,22 @@ describe('Style and CSS tests', () => {
     document.documentElement.innerHTML = html;
     expect($('section').hasClass('content')).toBe(true);
   })
+
+  test('H1 element has correct text', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('h1').text()).toMatch("The Game Shelf");//
+  })
+
+  test('Index Title has correct text', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    let title = $('title');
+    expect(title.text()).toMatch("CPTR220 Project Home");
+  })
+
 });
 
 describe('Interactive and Javascript tests', () => {
@@ -105,22 +107,41 @@ describe('Interactive and Javascript tests', () => {
     expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
   });
 
-  test('H1 element has correct text', () => {
-    const htmlPath = __dirname + '/index.html';
+  test('Rate game', () => {
+    const htmlPath = __dirname + '/catalog.html';
     const html = fs.readFileSync(htmlPath, 'utf-8');
     document.documentElement.innerHTML = html;
-    expect($('h1').text()).toMatch("The Game Shelf");//
-  })
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
 
-  test('Index Title has correct text', () => {
-    const htmlPath = __dirname + '/index.html';
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    let ratingElement = $('#game-list tr td:nth-child(1)');
+    let oldRating = ratingElement.text;
+    ratingElement.click();
+    expect(oldRating[0] < ratingElement.text[0]);
+  });
+
+  test('Delete game', () => {
+    const htmlPath = __dirname + '/catalog.html';
     const html = fs.readFileSync(htmlPath, 'utf-8');
     document.documentElement.innerHTML = html;
-    let title = $('title');
-    expect(title.text()).toMatch("CPTR220 Project Home");
-  })
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
 
-  
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    let oldSize = catalog.state.games.length;
+
+    $('#game-list tr td:nth-child(2)').click();
+
+    expect(catalog.state.games.length < oldSize);
+
+  })
 });
 
 

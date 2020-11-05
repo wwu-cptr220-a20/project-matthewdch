@@ -42,9 +42,28 @@ function createGameElement(game, id) {
         }
         renderGameTable();
     });
-    
+
     newGame.appendChild(tr2);
+
+    let tr3 = document.createElement('td');
+    let button = document.createElement('button');
+    button.type = 'button';
+    button.addEventListener('click', function() {
+        let index = state.games.indexOf(game);
+        console.log(index);
+        if(index > -1) {
+            state.games.splice(index, 1);
+        }
+        renderGameTable();
+    });
+    let icon = document.createElement('i');
+    icon.classList.add('fa');
+    icon.classList.add('fa-trash-o');
+    button.appendChild(icon);
+    tr3.appendChild(button);
     
+    newGame.appendChild(tr3);
+
     return newGame;
 }
 
