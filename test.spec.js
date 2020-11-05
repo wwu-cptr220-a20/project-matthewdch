@@ -128,7 +128,4 @@ describe('Interactive and Javascript tests', () => {
   
 });
 
-test('Header has a background color', () => {
-  let header = $('header');
-  expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
-})
+
