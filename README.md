@@ -18,7 +18,7 @@ Search and catalogue interactivity provided by Will
 
 # Stage 5 Tests
 
-Content and HTML tests: (Add name if you would like to add test for section)
+Content and HTML tests: Garrett
 
 Style and CSS tests: Garrett, Grace, Matthew, Theo
 
