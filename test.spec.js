@@ -94,4 +94,41 @@ describe('Interactive and Javascript tests', () => {
     expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
   });
 
+  test('H1 element has correct text', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('h1').text()).toMatch("The Game Shelf");//
+  })
+
+  test('Index Title has correct text', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    let title = $('title');
+    expect(title.text()).toMatch("CPTR220 Project Home");
+  })
+
+  //CSS test
+  test('Links have correct classes', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
+
+  //CSS test
+  test('Section has correct class', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('section').hasClass('content')).toBe(true);
+  })
+
+  
 });
+
+test('Header has a background color', () => {
+  let header = $('header');
+  expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
+})
