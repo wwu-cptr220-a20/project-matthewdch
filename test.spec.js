@@ -59,7 +59,23 @@ describe('Source code is valid', () => {
     $('#submit-button').click();
 
     expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
+  });
 
+  test('Rate game', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
+
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
+
+    let ratingElement = $('#game-list tr td');
+    let oldRating = ratingElement.text;
+    ratingElement.click();
+    expect(oldRating[0] < ratingElement.text[0]);
   });
 
   test('H1 element has correct text', () => {
