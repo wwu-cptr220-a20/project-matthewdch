@@ -1,7 +1,14 @@
 const fs = require('fs');
-
 //include custom matchers
 const styleMatchers = require('jest-style-matchers');
+const htmlPath = __dirname + '/index.html';
+const html = fs.readFileSync(htmlPath, 'utf-8');
+
+//const solution = require(jsPath); //load the solution
+
+const $ = require('jquery');
+
+document.documentElement.innerHTML = html;
 expect.extend(styleMatchers);
 
 describe('Source code is valid', () => {
@@ -76,4 +83,13 @@ describe('Source code is valid', () => {
   //   expect(catalog.state.searchResults.includes({name: 'Catan', selected: false}));
 
   // })
+
+  test('H1 element has correct text', () => {
+    expect($('h1').text()).toMatch("The Game Shelf");//
+  })
+
+  test('Links have correct classes', () => {
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
 });
+
