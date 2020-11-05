@@ -196,3 +196,11 @@ function addSelectionToCollection() {
     })
     renderGameTable();
 }
+
+
+//Make functions and variables available to tester. DO NOT MODIFY THIS.
+if(typeof module !== 'undefined' && module.exports){
+    /* eslint-disable */
+    if(typeof state !== 'undefined') 
+      module.exports.state = state;
+}

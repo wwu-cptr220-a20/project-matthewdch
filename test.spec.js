@@ -47,42 +47,20 @@ describe('Source code is valid', () => {
     }
   })
 
-  test('Search feature returns list of appropriate games', () => {
-    const html = fs.readFileSync('./catalog.html', 'utf-8');
+  test('Add game manually', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
     document.documentElement.innerHTML = html;
-    const catalog = require('./js/catalog.js');
+    const jsPath = __dirname + '/js/catalog.js';
+    const catalog = require(jsPath);
 
-    const firstFiveExpectedResults = [
-      {name: 'Catan', selected: false},
-      {name: 'Catan: 5-6 Player Extension', selected: false},
-      {name: 'Catan: Cities & Knights', selected: false},
-      {name: 'Catan Card Game', selected: false},
-      {name: 'Rivals for Catan', selected: false},
-    ]
-    document.querySelector('#search-modal-open-button').click();
-    document.querySelector('#searchInput').value = 'Catan';
-    document.querySelector('#searchInput').dispatchEvent(new Event('input'));
-    document.querySelector('#search-button').click();
+    $('#boardGameInput').val('Catan');
+    $('#boardGameInput')[0].dispatchEvent(new Event('input'));
+    $('#submit-button').click();
 
-    for(let i = 0; i < 5; i++) {
-      expect(firstFiveExpectedResults[i] == catalog.state.searchResults[i]);
-    }
+    expect(catalog.state.games.includes({name: 'Catan', rating: 0}));
 
-  })
-
-  // test('Add game through search feature', () => {
-  //   const catalog = require('./js/catalog.js');
-
-  //   document.querySelector('#search-modal-open-button').click();
-  //   $('#searchInput').val('Catan');
-  //   $('#searchInput').dispatchEvent(new Event('input'));
-  //   $('#search-button').click();
-  //   $('.far')[0].click();
-  //   $('#search-submit-button').click();
-
-  //   expect(catalog.state.searchResults.includes({name: 'Catan', selected: false}));
-
-  // })
+  });
 
   test('H1 element has correct text', () => {
     expect($('h1').text()).toMatch("The Game Shelf");//
