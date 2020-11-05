@@ -141,6 +141,15 @@ describe('Interactive and Javascript tests', () => {
 
     expect(catalog.state.games.length < oldSize);
 
+  });
+
+  test('Open search menu', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+
+    $('search-modal-open-button').click();
+    expect($('searchModal').style == 'display: block');
   })
 });
 
