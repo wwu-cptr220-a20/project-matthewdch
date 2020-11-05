@@ -75,21 +75,6 @@ describe('Style and CSS tests', () => {
     expect($('section').hasClass('content')).toBe(true);
   })
 
-  test('H1 element has correct text', () => {
-    const htmlPath = __dirname + '/index.html';
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    document.documentElement.innerHTML = html;
-    expect($('h1').text()).toMatch("The Game Shelf");//
-  })
-
-  test('Index Title has correct text', () => {
-    const htmlPath = __dirname + '/index.html';
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    document.documentElement.innerHTML = html;
-    let title = $('title');
-    expect(title.text()).toMatch("CPTR220 Project Home");
-  })
-
 });
 
 describe('Interactive and Javascript tests', () => {
