@@ -56,6 +56,13 @@ describe('Content and HTML tests', () => {
   test('Links have correct classes', () => {
     expect($('a').hasClass('btn btn-dark')).toBe(true);
   })
+  test('Footer has correct text', () => {
+    expect($('footer').text()).toMatch("Matthew DeChance, 2020");
+  })
+  test('Main has apporpriate sections', () => {
+    let mainSections = $('main').children();
+    expect(mainSections.length).toEqual(3);
+  })
 });
 
 describe('Style and CSS tests', () => {
