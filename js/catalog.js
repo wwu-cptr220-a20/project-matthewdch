@@ -1,119 +1,198 @@
+'use strict';
 
-var rowList = ["3.5", "Monopoly", "50W/0L", "img/monopoly.jpg",
-    "3", "Uno", "1W/600L", "img/uno.jpg",
-    "5", "What do you Meme?", "?W/?L", "img/wdym.jpg",
-    "4", "Villainous", "25W/2L", "img/villainous.jpg"];
+let tempClientID = 'glHGH0lSL1';
+let searchLimit = 15;
 
+// Global state variable
+let state = {
+    games: [
+        {name:"Secret Hitler", rating:5},
+        {name:"Munchkin", rating:4},
+        {name:"Bang!", rating:5},
+    ],
+    searchResults: [
+    ],
+    inputText: '',
+    searchInputText: '',
+};
 
+// Create the visible elements
+function createGameElement(game, id) {
+    let newGame = document.createElement('tr');
+    newGame.classList.add("text-dark");
+    let th = document.createElement('th');
+    th.scope = "row";
+    th.textContent = id;
+    
+    newGame.appendChild(th);
 
-/* Grab inputs for new row */
+    let tr1 = document.createElement('td');
+    tr1.textContent = game.name;
+    
+    newGame.appendChild(tr1);
 
-
-var ratingInput = document.querySelector("#ratingInput");
-var gameInput = document.querySelector("#gameInput");
-var ratioInput = document.querySelector("#ratioInput");
-var imageInput = document.querySelector("#imageInput");
-var submit = document.querySelector("#submit");
-function createRow() {
-    let newRow = document.createElement("tr")
-    for (let i = 0; i < 4; i++) {
-        let newCell = document.createElement("td")
-        switch (i) {
-            case 0:
-
-                newCell.textContent = ratingInput.value;
-                newRow.append(newCell);
-                break;
-            case 1:
-
-                newCell.textContent = gameInput.value;
-                newRow.append(newCell);
-                break;
-            case 2:
-
-                newCell.textContent = ratioInput.value;
-                newRow.append(newCell);
-                break;
-            case 3: {
-                let newImg = document.createElement("img");
-                newImg.src = imageInput.value;
-                newImg.classList.add("game_photo");
-                newCell.append(newImg);
-                newRow.append(newCell);
-                break;
-            }
+    let tr2 = document.createElement('td');
+    tr2.textContent = game.rating + " stars";
+    tr2.addEventListener('click', function() {
+        if(game.rating == 5) {
+            game.rating = 0;
         }
-    }
-
-
-    return newRow
-}
-
-function printRow(rowNum) {
-    let newRow = document.createElement("tr")
-    for (let i = 0; i < 4; i++) {
-        let newCell = document.createElement("td")
-        switch (i) {
-            case 0:
-
-                newCell.textContent = rowList[rowNum * 4];
-                newRow.append(newCell);
-                break;
-            case 1:
-
-                newCell.textContent = rowList[rowNum * 4 + 1];
-                newRow.append(newCell);
-                break;
-            case 2:
-
-                newCell.textContent = rowList[rowNum * 4 + 2];
-                newRow.append(newCell);
-                break;
-            case 3: {
-                let newImg = document.createElement("img");
-                newImg.src = rowList[rowNum * 4 + 3];
-                newImg.classList.add("game_photo");
-                newCell.append(newImg);
-                newRow.append(newCell);
-                break;
-            }
+        else {
+            game.rating += 1
         }
-    }
-
-
-    return newRow
+        renderGameTable();
+    });
+    
+    newGame.appendChild(tr2);
+    
+    return newGame;
 }
 
-function appendRow() {
-    console.log("Ran");
-    var last = document.querySelector('tbody');
-    last.append(createRow());
-    console.log(last);
+// Render the table with the visible elements
+function renderGameTable() {
+    let tableElement = document.querySelector('#game-list');
+    tableElement.innerHTML = '';
+    state.games.forEach((game, index) => {
+        tableElement.appendChild(createGameElement(game, index + 1));
+    });
+    renderInput();
+}
+renderGameTable();
+
+// Input logic
+function addNewGame() {
+    state.games.push({
+        name: state.inputText,
+        rating: 0
+    });
+    state.inputText = '';
+    renderGameTable();
 }
 
+document.getElementById('boardGameInput').addEventListener('input', function() {
+    state.inputText = document.getElementById('boardGameInput').value;
+    renderInput();
+});
 
+document.getElementById('submit-button').addEventListener('click', addNewGame);
 
-function render() {
-    var body = document.querySelector('tbody');
-    removeAllChildNodes(body);
-
-    var last = document.querySelector('tbody');
-    var rowSize = rowList.length / 4;
-    for (let i = 0; i < rowSize; i++) {
-        last.append(printRow(i));
+function renderInput() {
+    document.getElementById('boardGameInput').value = state.inputText;
+    if(state.inputText == '') {
+        document.getElementById('submit-button').disabled = true;
     }
-    appendRow();
-
+    else {
+        document.getElementById('submit-button').disabled = false;
+    }
 }
 
-submit.addEventListener('click', render);
+/*
 
+MODAL
 
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
+*/
 
-        parent.removeChild(parent.firstChild);
+// Input listener
+document.getElementById('searchInput').addEventListener('input', function() {
+    state.searchInputText = document.getElementById('searchInput').value;
+    renderSearchInput();
+});
+
+// Search button click listener
+document.getElementById('search-button').addEventListener('click', function() {
+    state.searchResults = [];
+    getResults().then(() => renderSearchTable());
+})
+
+// Submit button click listener
+document.getElementById('search-submit-button').addEventListener('click', function() {
+    addSelectionToCollection();
+})
+
+// // Modal open button listener
+document.getElementById('search-modal-open-button').addEventListener('click', function() {
+    state.searchInputText = '';
+    state.searchResults = [];
+    renderSearchTable();
+})
+
+// Create the visible elements
+function createResultElement(game, id) {
+    let newGame = document.createElement('tr');
+
+    let th = document.createElement('th');
+    th.scope = "row";
+    th.textContent = id;
+    newGame.appendChild(th);
+
+    let td = document.createElement('td');
+    td.textContent = game.name;
+    newGame.appendChild(td);
+
+    let td2 = document.createElement('td');
+    let check = document.createElement('i');
+    check.classList.add("far");
+    check.classList.add("fa-square");
+    newGame.addEventListener('click', function() {
+        game.selected = !game.selected;
+        renderSearchTable();
+    });
+    if(game.selected){
+        check.classList.replace("fa-square", "fa-check-square");
     }
+    else {
+        check.classList.replace("fa-check-square", "fa-square");
+    }
+    td2.appendChild(check);
+    newGame.appendChild(td2);
+    
+    return newGame;
+}
 
+// Render the table with the visible elements
+function renderSearchTable() {
+    let tableElement = document.getElementById('game-search-list');
+    tableElement.innerHTML = '';
+    state.searchResults.forEach((game, index) => {
+        tableElement.appendChild(createResultElement(game, index + 1));
+    });
+    renderSearchInput();
+}
 
+renderSearchTable();
+
+// Renders text input and search button
+function renderSearchInput() {
+    document.getElementById('searchInput').value = state.searchInputText;
+    if(state.searchInputText == '') {
+        document.getElementById('search-button').disabled = true;
+    }
+    else {
+        document.getElementById('search-button').disabled = false;
+    }
+}
+
+// Searches Board Game Atlas for terms in state.searchInputText
+function getResults() {
+    // TODO change client ID to get from env var
+    let url = `https://api.boardgameatlas.com/api/search?name=${state.searchInputText}&limit=${searchLimit}&client_id=${tempClientID}`
+    return fetch(url).then((response) => {
+        return response.json();
+    }).then((json) =>{
+        json.games.forEach((game) => {state.searchResults.push({name: game.name, selected: false})});
+        
+    });
+}
+
+// Adds selected games to collection
+function addSelectionToCollection() {
+    state.searchResults.forEach((game) => {
+        if(game.selected) {
+            state.games.push({
+                name: game.name,
+                rating: 0
+            });
+        }
+    })
+    renderGameTable();
 }

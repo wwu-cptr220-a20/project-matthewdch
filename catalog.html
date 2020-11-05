@@ -1,92 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>CPTR220 Project Home</title>
-    <meta charset="utf-8">
-    <meta name="author" content="Matthew DeChance">
-    <meta name="description" content="A Digital Game Library for Physical Games">
-    <meta name="keywords" content="Board Games, catalog, stat tracking">
-    <link rel="Stylesheet" href="css/style.css">
-    <link rel="Stylesheet" href="https://yarnpkg.com/en/package/normalize.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="img/icon.png">
-</head>
-<body>
-    <header>
-        <h1>The Game Shelf</h1>
-        <nav>
-            <a href="index.html" type="button" class="btn btn-dark">Home</a>
-            <a href="info.html" type="button" class="btn btn-dark">About</a>
-            <a href="info.html#Stats" type="button" class="btn btn-dark">Stats</a>
-            <a href="catalog.html" type="button" class="btn btn-dark">Catalog</a>
-            <a href="music.html" type="button" class="btn btn-dark">Music</a>
-        </nav>
-    </header>
-<main>
-    <h3>Games you own</h3>
-    <table>
-        <thead>
-             <tr>
-                <th>Rating</th>
-                <th>Game</th>
-                <th>Win Ratio</th>
-                <th>Image</th>
-                <th>Changes</th>
-             </tr>
-         </thead>
-         <tbody>
-             <tr  class="mainrows">
-                <td>3.5</td>
-                <td>Monopoly</td>
-                <td>50W/0L</td>
-                <td>
-                    <img class="game_photo" src="img/monopoly.jpg" alt="monopoly">
-                </td>
-                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
-             </tr>
-             <tr  class="mainrows">
-                <td>3</td>
-                <td>Uno</td>
-                <td>1W/600L</td>
-                <td>
-                    <img class="game_photo" src="img/uno.jpg" alt="uno">
-                </td>
-                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
-             </tr>
-             <tr  class="mainrows">
-                <td>5</td>
-                <td>What do you Meme?</td>
-                <td>?W/?L</td>
-                <td>
-                    <img class="game_photo" src="img/wdym.jpg" alt="wdym">
-                </td>
-                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
-             </tr>
-             <tr class="mainrows">
-                <td>4</td>
-                <td>Villainous</td>
-                <td>25W/2L</td>
-                <td>
-                    <img class="game_photo" src="img/villainous.jpg" alt="Villainous">
-                </td>
-                <td><button type="button"><i class="fa fa-trash-o"></i></button></td>
-             </tr>
-             <tr>
-                <td><input type="text" id="ratingInput" name="rating"></td>
-                <td><input type="text" id="gameInput" name="gmae"></td>
-                <td><input type="text" id="ratioInput" name="ratio"></td>
-                <td><input type="text" id="imageInput" name="image"></td>
-                <td><button type="button" id="submit">Submit</button></td>
-             </tr>
-         </tbody>
-    </table>
-</main>
-<footer>
-    <p>&#169;Matthew DeChance, 2020</p>
-</footer>
-<!-- JS FILE LINK-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="js/catalog.js"></script>
-</body>
+    <head>
+        <!-- Metadata -->
+        <meta charset="utf-8">
+        <meta name="author" content="Will Hensel">
+        <meta name="description" content="An app to organize your board games">
+        <meta name="keywords" content="Board Games, organization, rating">
+
+        <!-- Stylesheets and Bootstrap -->
+        <link href="https://classic.yarnpkg.com/en/package/normalize.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="./img/favicon.png">
+
+        <title>Board Game Organizer</title>
+    </head>
+    <body>
+        <header>
+            <h1>The Game Shelf</h1>
+            <nav>
+                <a href="index.html" type="button" class="btn btn-dark">Home</a>
+                <a href="info.html" type="button" class="btn btn-dark">About</a>
+                <a href="info.html#Stats" type="button" class="btn btn-dark">Stats</a>
+                <a href="catalog.html" type="button" class="btn btn-dark">Catalog</a>
+                <a href="music.html" type="button" class="btn btn-dark">Music</a>
+            </nav>
+        </header>
+        <section class="content">
+            <div class="container mt-4 mb-4">
+                <label for="boardGameInput">Enter a board game</label>
+                <div class="form-inline">
+                    <input type="text" class="form-control" id="boardGameInput">
+                    <button type="button" class="btn btn-success ml-4" id="submit-button">Submit</button>
+                    <button type="button" class="btn btn-primary ml-4" data-toggle="modal" data-target="#searchModal" id="search-modal-open-button">Search</button>
+                </div>
+            </div>
+            <div class="container mt-4 mb-4">
+                <table class="table table-dark">
+                    <tbody id="game-list">
+                    </tbody>
+                </table>
+            </div>
+            <div class="container mt-4 mb-4">
+                <h1>How to</h1>
+                <ul>
+                    <li>
+                        <p>
+                            Enter the name of a board game to add to your collection in the input field and click submit
+                            to add a new game.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Click on the star rating on the game to change it.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Click on the search button to bring up the search box.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title" id="searchModalLabel">Search</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-4 mb-4">
+                        <label for="boardGameInput">Search for a game</label>
+                        <div class="form-inline">
+                            <input type="text" class="form-control" id="searchInput">
+                            <button type="button" class="btn btn-success ml-4" id="search-button" disabled="true14">Search</button>
+                        </div>
+                    </div>
+                    <div class="container mt-4 mb-4">
+                        <table class="table">
+                            <tbody id="game-search-list">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="search-submit-button" data-dismiss="modal">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <footer>
+            <p>&#169; Will Hensel, 2020</p>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="./js/catalog.js"></script>
+    </body>
 </html>
