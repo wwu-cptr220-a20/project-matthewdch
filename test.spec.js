@@ -73,10 +73,21 @@ describe('Content and HTML tests', () => {
 });
 
 describe('Style and CSS tests', () => {
-  test('Header has a background color', () => {
-    let header = $('header');
-    expect(header.css('background-color').toLowerCase()).toEqual(rgb(204, 240, 243));
-  }) 
+  //CSS test
+  test('Links have correct classes', () => {
+    const htmlPath = __dirname + '/index.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
+
+  //CSS test
+  test('Section has correct class', () => {
+    const htmlPath = __dirname + '/catalog.html';
+    const html = fs.readFileSync(htmlPath, 'utf-8');
+    document.documentElement.innerHTML = html;
+    expect($('section').hasClass('content')).toBe(true);
+  })
 });
 
 describe('Interactive and Javascript tests', () => {
@@ -107,22 +118,6 @@ describe('Interactive and Javascript tests', () => {
     document.documentElement.innerHTML = html;
     let title = $('title');
     expect(title.text()).toMatch("CPTR220 Project Home");
-  })
-
-  //CSS test
-  test('Links have correct classes', () => {
-    const htmlPath = __dirname + '/index.html';
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    document.documentElement.innerHTML = html;
-    expect($('a').hasClass('btn btn-dark')).toBe(true);
-  })
-
-  //CSS test
-  test('Section has correct class', () => {
-    const htmlPath = __dirname + '/catalog.html';
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    document.documentElement.innerHTML = html;
-    expect($('section').hasClass('content')).toBe(true);
   })
 
   
