@@ -50,5 +50,9 @@ describe('Source code is valid', () => {
   test('H1 element has correct text', () => {
     expect($('h1').text()).toMatch("The Game Shelf");//
   })
+
+  test('Links have correct classes', () => {
+    expect($('a').hasClass('btn btn-dark')).toBe(true);
+  })
 });
 
