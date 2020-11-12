@@ -27,9 +27,9 @@ export default class App extends Component {
             </nav>
            </header>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/info" component={About} />
-            <Route path="/catalog" component={Catalog} />
+            <Route path="/" exact component={Home}/>
+            <Route path="/info" exact component={About} />
+            <Route path="/catalog" exact component={Catalog} />
           </Switch>
         </div>
         <footer>
