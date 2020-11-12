@@ -26,11 +26,11 @@ export default class App extends Component {
               </Link>
             </nav>
            </header>
-          <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/info" component={About} />
-            <Route path="/catalog" component={Catalog} />
-          </Switch>
+          
+          <Route exact path="/" component={Home}/>
+          <Route path="/info" component={About} />
+          <Route path="/catalog" component={Catalog} />
+          
         </div>
         <footer>
           <p>&#169; Matthew DeChance, Garrett Moody, Grace Morales, Theo Moen, Will Hensel, 2020</p>
