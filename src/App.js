@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css';
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   Link
@@ -11,7 +11,7 @@ export default class App extends Component {
   render () {
     return (
 
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <div>
           <header>
             <h1>The Game Shelf</h1>
@@ -36,7 +36,7 @@ export default class App extends Component {
         <footer>
           <p>&#169; Matthew DeChance, Garrett Moody, Grace Morales, Theo Moen, Will Hensel, 2020</p>
         </footer>
-      </HashRouter>
+      </BrowserRouter>
     )
   }
 }
