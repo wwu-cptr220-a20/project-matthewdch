@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
@@ -27,11 +27,11 @@ export default class App extends Component {
               </Link>
             </nav>
             </header>
-          
-          <Route exact path="/" component={Home}/>
-          <Route path="/info" component={About} />
-          <Route path="/catalog" component={Catalog} />
-          
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/info" component={About} />
+            <Route exact path="/catalog" component={Catalog} />
+          </Switch>
         </div>
         <footer>
           <p>&#169; Matthew DeChance, Garrett Moody, Grace Morales, Theo Moen, Will Hensel, 2020</p>
