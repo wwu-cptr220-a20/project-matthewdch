@@ -1,7 +1,6 @@
 {
   "short_name": "React App",
   "name": "Create React App Sample",
-  "homepage":"https://wwu-cptr220-a20.github.io/project-matthewdch/",
   "icons": [
     {
       "src": "favicon.ico",
