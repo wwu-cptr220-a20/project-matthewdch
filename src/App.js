@@ -82,6 +82,116 @@ class About extends Component {
 }
 
 class Catalog extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.tempClientID = 'glHGH0lSL1';
+    this.searchLimit = 15;
+
+    this.state = {
+        games: [
+          {name:"Secret Hitler", rating:5},
+          {name:"Munchkin", rating:4},
+          {name:"Bang!", rating:5},
+      ],
+      searchResults: [
+      ],
+      inputText: '',
+      searchInputText: '',
+      awaitingResults: false,
+    }
+
+    this.handleGameDeleteClick = this.handleGameDeleteClick.bind(this)
+    this.handleGameElementClick = this.handleGameElementClick.bind(this)
+    this.getResults = this.getResults(this)
+  }
+
+
+  handleGameDeleteClick(game) {
+    let index = this.state.games.indexOf(game);
+    console.log(index);
+    if(index > -1) {
+      this.setState(() => this.state.games.splice(index, 1));
+    }
+  }
+
+  handleGameElementClick(game) {
+    if(game.rating == 5) {
+      this.setState(() => game.rating = 0);
+    }
+    else {
+      this.setState(() => game.rating += 1);
+    }
+  }
+  
+  // Input logic
+  addNewGame() {
+    if(this.state.inputText != '') {
+      this.setState(() => this.state.games.push({
+        name: this.state.inputText,
+        rating: 0
+      }));
+  
+      this.setState({
+        inputText: '',
+      })
+    }
+  }
+
+
+/*
+
+MODAL
+
+*/
+
+  handleSearchInput(value) {
+    this.setState({
+      searchInputText: value,
+    });
+  }
+
+  handleSearchSubmitButtonClick() {
+    this.addSelectionToCollection();
+  }
+
+  handleSearchModalOpenButtonClick() {
+    this.setState({
+      searchInputText: '',
+      searchResults: [],
+    });
+
+    this.renderSearchTable();
+  }
+
+// Searches Board Game Atlas for terms in state.searchInputText
+  getResults() {
+    this.setState({awaitingResults: true})
+    // TODO change client ID to get from env var
+    let url = `https://api.boardgameatlas.com/api/search?name=${this.state.searchInputText}&limit=${this.searchLimit}&client_id=${this.tempClientID}`
+    return fetch(url).then((response) => {
+      return response.json();
+    }).then((json) =>{
+      json.games.forEach((game) => this.setState(() => (this.state.searchResults.push({name: game.name, selected: false}))));
+    }).then(
+      this.setState({awaitingResults: false})
+    );
+  }
+
+// Adds selected games to collection
+  addSelectionToCollection() {
+    this.setState(() => this.state.searchResults.forEach((game) => {
+      if(game.selected) {
+        this.state.games.push({
+            name: game.name,
+            rating: 0
+        });
+      }
+    }))
+  }
+
+
   render() {
     return (
       <main>
@@ -89,14 +199,28 @@ class Catalog extends Component {
             <div className="container mt-4 mb-4">
                 <label for="boardGameInput">Enter a board game</label>
                 <div className="form-inline">
-                    <input type="text" className="form-control" id="boardGameInput"/>
-                    <button type="button" className="btn btn-success ml-4" id="submit-button">Submit</button>
+                    <input type="text" className="form-control" value={this.state.inputText} onChange={e => this.setState({inputText: e.target.value})}/>
+                    <button type="button" className="btn btn-success ml-4" id="submit-button" onClick={() => this.addNewGame()}>Submit</button>
                     <button type="button" className="btn btn-primary ml-4" data-toggle="modal" data-target="#searchModal" id="search-modal-open-button">Search</button>
                 </div>
             </div>
             <div className="container mt-4 mb-4">
                 <table className="table table-dark">
                     <tbody id="game-list">
+                      {
+                        this.state.games.map((game) => 
+                          <tr>
+                            <th scope="row" className="text-dark">{game.id}</th>
+                            <td>{game.name}</td>
+                            <td onClick={() => this.handleGameElementClick(game)}>{game.rating} stars</td>
+                            <td>
+                              <button onClick={() => this.handleGameDeleteClick(game)}>
+                                <i className="fa fa-trash-o" />
+                              </button>
+                            </td>
+                          </tr>
+                      )
+                      }
                     </tbody>
                 </table>
             </div>
@@ -135,13 +259,33 @@ class Catalog extends Component {
                     <div className="container mt-4 mb-4">
                         <label for="boardGameInput">Search for a game</label>
                         <div className="form-inline">
-                            <input type="text" className="form-control" id="searchInput"/>
-                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled="true14">Search</button>
+                            <input type="text" className="form-control" id="searchInput" value={this.state.searchInputText} onChange={e => this.handleSearchInput(e.target.value)}/>
+                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled={this.state.searchInputText == '' ? true : false}  onClick={this.getResults}>Search</button>
                         </div>
                     </div>
                     <div className="container mt-4 mb-4">
                         <table className="table">
                             <tbody id="game-search-list">
+                              {
+                                
+                                this.state.awaitingResults ?
+                                {} : this.state.searchResults.map((game) => {
+                                  <tr>
+                                    <th scope="row">{game.id}</th>
+                                    <td>{game.name}</td>
+                                    <td>
+                                      {
+                                        game.selected ? <i className="far fa-square"></i>
+                                        :
+                                        <i className="far fa-check-square"></i>
+                                      }
+                                      <i className="far fa-square" onClick={() => {
+                                        this.setState(() => game.selected = !game.selected);
+                                      }}/>
+                                    </td>
+                                  </tr>
+                                })
+                              }
                             </tbody>
                         </table>
                     </div>
