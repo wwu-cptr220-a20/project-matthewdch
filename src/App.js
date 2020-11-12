@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   Link
@@ -10,7 +10,8 @@ import {
 export default class App extends Component {
   render () {
     return (
-      <Router basename="/">
+
+      <Router basename={process.env.PUBLIC_URL}>
         <div>
           <header>
             <h1>The Game Shelf</h1>
@@ -25,7 +26,7 @@ export default class App extends Component {
                 <button className="btn btn-dark">Catalog</button>
               </Link>
             </nav>
-           </header>
+            </header>
           
           <Route exact path="/" component={Home}/>
           <Route path="/info" component={About} />
