@@ -16,21 +16,21 @@ export default class App extends Component {
           <header>
             <h1>The Game Shelf</h1>
             <nav>
-              <Link to={process.env.PUBLIC_URL + '/'}>
+              <Link to='/'>
                 <button className="btn btn-dark">Home</button>
               </Link>
-              <Link to={process.env.PUBLIC_URL + '/info'}>
+              <Link to='/info'>
                 <button className="btn btn-dark">About</button>
               </Link>
-              <Link to={process.env.PUBLIC_URL + '/catalog'}>
+              <Link to='/catalog'>
                 <button className="btn btn-dark">Catalog</button>
               </Link>
             </nav>
             </header>
           
-          <Route exact path={process.env.PUBLIC_URL + '/'} component={Home}/>
-          <Route path={process.env.PUBLIC_URL + '/info'} component={About} />
-          <Route path={process.env.PUBLIC_URL + '/catalog'} component={Catalog} />
+          <Route exact path="/" component={Home}/>
+          <Route path="/info" component={About} />
+          <Route path="/catalog" component={Catalog} />
           
         </div>
         <footer>
