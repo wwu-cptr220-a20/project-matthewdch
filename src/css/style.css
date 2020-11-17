@@ -1,17 +1,17 @@
 html {
     height: 100%;
 }
-/* body{
+body{
     
     background: radial-gradient(rgb(53, 51, 51), #363636);
-} */
+}
 @media (min-width: 1000px) {
     body {
-        /* background: linear-gradient(#ffffff00, #363636), url("../img/background.jpg"); */
+        background: linear-gradient(#ffffff00, #363636), url("../img/background.jpg");
         /*IMG from https://www.boardgamehalv.com/settlers-of-catan-review/*/
-        /* background-position: center;
+        background-position: center;
         background-size: cover;
-        background-repeat: no-repeat; */
+        background-repeat: no-repeat;
         
     }
 }
