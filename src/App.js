@@ -136,7 +136,7 @@ class Catalog extends Component {
   }
 
   handleGameElementClick(game) {
-    if(game.rating == 5) {
+    if(game.rating === 5) {
       this.setState(() => game.rating = 0);
     }
     else {
@@ -146,7 +146,7 @@ class Catalog extends Component {
   
   // Input logic
   addNewGame() {
-    if(this.state.inputText != '') {
+    if(this.state.inputText !== '') {
       this.setState(() => this.state.games.push({
         name: this.state.inputText,
         rating: 0
@@ -279,7 +279,7 @@ MODAL
                         <label for="boardGameInput">Search for a game</label>
                         <div className="form-inline">
                             <input type="text" className="form-control" id="searchInput" value={this.state.searchInputText} onChange={e => this.handleSearchInput(e.target.value)}/>
-                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled={this.state.searchInputText == '' ? true : false}  onClick={this.getResults}>Search</button>
+                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled={this.state.searchInputText === '' ? true : false}  onClick={this.getResults}>Search</button>
                         </div>
                     </div>
                     <div className="container mt-4 mb-4">
