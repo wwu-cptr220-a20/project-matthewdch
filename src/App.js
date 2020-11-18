@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import './css/style.css';
 import {
   HashRouter as Router,
@@ -24,12 +24,16 @@ export default class App extends Component {
               <Link to='/catalog'>
                 <button className="btn btn-dark">Catalog</button>
               </Link>
+              <Link to='/gamebookmark'>
+                <button className="btn btn-dark">Saved Games</button>
+              </Link>
             </nav>
            </header>
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/info" exact component={About} />
             <Route path="/catalog" exact component={Catalog} />
+            <Route path="/gamebookmark" exact component={GameBookmark} />
           </Switch>
         </div>
         <footer>
@@ -119,11 +123,11 @@ class Catalog extends Component {
       inputText: '',
       searchInputText: '',
       awaitingResults: false,
+      allowSearch: false,
     }
 
     this.handleGameDeleteClick = this.handleGameDeleteClick.bind(this)
     this.handleGameElementClick = this.handleGameElementClick.bind(this)
-    this.getResults = this.getResults(this)
   }
 
 
@@ -184,6 +188,12 @@ MODAL
     this.renderSearchTable();
   }
 
+  componentDidMount() {
+    this.setState({
+      allowSearch: true,
+    })
+  }
+
 // Searches Board Game Atlas for terms in state.searchInputText
   getResults() {
     this.setState({awaitingResults: true})
@@ -200,14 +210,21 @@ MODAL
 
 // Adds selected games to collection
   addSelectionToCollection() {
-    this.setState(() => this.state.searchResults.forEach((game) => {
+    let games = [];
+    this.state.games.forEach((game) => {
+      games.push(game);
+    });
+    this.state.searchResults.forEach((game) => {
       if(game.selected) {
-        this.state.games.push({
+        games.push({
             name: game.name,
             rating: 0
         });
       }
-    }))
+    });
+    this.setState({
+      games: games,
+    });
   }
 
 
@@ -279,7 +296,7 @@ MODAL
                         <label for="boardGameInput">Search for a game</label>
                         <div className="form-inline">
                             <input type="text" className="form-control" id="searchInput" value={this.state.searchInputText} onChange={e => this.handleSearchInput(e.target.value)}/>
-                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled={this.state.searchInputText === '' ? true : false}  onClick={this.getResults}>Search</button>
+                            <button type="button" className="btn btn-success ml-4" id="search-button" disabled={this.state.searchInputText === '' ? (this.state.allowSearch ? true : false) : false}  onClick={() => this.getResults()}>Search</button>
                         </div>
                     </div>
                     <div className="container mt-4 mb-4">
@@ -288,22 +305,23 @@ MODAL
                               {
                                 
                                 this.state.awaitingResults ?
-                                {} : this.state.searchResults.map((game) => {
+                                {} : this.state.searchResults.map((game) => { return(
                                   <tr>
                                     <th scope="row">{game.id}</th>
                                     <td>{game.name}</td>
                                     <td>
                                       {
-                                        game.selected ? <i className="far fa-square"></i>
+                                        game.selected ? <i className="far fa-check-square" onClick={() => {
+                                          this.setState(() => game.selected = !game.selected);
+                                        }}></i>
                                         :
-                                        <i className="far fa-check-square"></i>
+                                        <i className="far fa-square" onClick={() => {
+                                          this.setState(() => game.selected = !game.selected);
+                                        }}></i>
                                       }
-                                      <i className="far fa-square" onClick={() => {
-                                        this.setState(() => game.selected = !game.selected);
-                                      }}/>
                                     </td>
                                   </tr>
-                                })
+                                )})
                               }
                             </tbody>
                         </table>
@@ -311,12 +329,56 @@ MODAL
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-primary" id="search-submit-button" data-dismiss="modal">Submit</button>
+                  <button type="button" className="btn btn-primary" id="search-submit-button" data-dismiss="modal" onClick={() => this.addSelectionToCollection()}>Submit</button>
                 </div>
               </div>
             </div>
           </div>
       </div>
+    )
+  }
+}
+
+class GameBookmark extends Component {
+  // https://dev.to/asimdahall/client-side-image-upload-in-react-5ffc
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploadedImage: createRef(null),
+    }
+  }
+
+  handleImageUpload(e) {
+    const [file] = e.target.files;
+    if(file) {
+      const reader = new FileReader();
+      const {current} = this.state.uploadedImage;
+      current.file = file;
+      reader.onload = (e) => {
+        current.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
+  render() {
+    return (
+      <section class="content">
+          <input type="file" accept="image/*" multiple="false" onChange={(e) => this.handleImageUpload(e)}/>
+          <div class="container mt-4">
+              <div class="card text-white bg-dark mb-3">
+                  <div class="col-md-3">
+                      <img class="card-img-top" alt="" ref={this.state.uploadedImage}/>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <p class="card-text">Secret Hitler</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
     )
   }
 }
