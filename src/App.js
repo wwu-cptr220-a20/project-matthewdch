@@ -4,7 +4,7 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 
 export default class App extends Component {
@@ -34,6 +34,7 @@ export default class App extends Component {
             <Route path="/info" exact component={About} />
             <Route path="/catalog" exact component={Catalog} />
             <Route path="/gamebookmark" exact component={GameBookmark} />
+            <Route path="/catalog/:gameId" exact component={Game} />
           </Switch>
         </div>
         <footer>
@@ -114,9 +115,9 @@ class Catalog extends Component {
 
     this.state = {
         games: [
-          {name:"Secret Hitler", rating:5},
-          {name:"Munchkin", rating:4},
-          {name:"Bang!", rating:5},
+          {id: 1, name:"Secret Hitler", rating:5, description:"Find the fascist"},
+          {id: 2, name:"Munchkin", rating:4, description:"Explore the dungeons"},
+          {id: 3, name:"Bang!", rating:5, description:"Kill the renegades"},
       ],
       searchResults: [
       ],
@@ -202,7 +203,7 @@ MODAL
     return fetch(url).then((response) => {
       return response.json();
     }).then((json) =>{
-      json.games.forEach((game) => this.setState(() => (this.state.searchResults.push({name: game.name, selected: false}))));
+      json.games.forEach((game, index) => this.setState(() => (this.state.searchResults.push({id: index + 1, name: game.name, selected: false, description: game.description}))));
     }).then(
       this.setState({awaitingResults: false})
     );
@@ -212,11 +213,13 @@ MODAL
   addSelectionToCollection() {
     let games = [];
     this.state.games.forEach((game) => {
+      game.id = games.length + 1;
       games.push(game);
     });
     this.state.searchResults.forEach((game) => {
       if(game.selected) {
         games.push({
+            id: games.length + 1,
             name: game.name,
             rating: 0
         });
@@ -247,7 +250,7 @@ MODAL
                         this.state.games.map((game) => 
                           <tr>
                             <th scope="row" className="text-dark">{game.id}</th>
-                            <td>{game.name}</td>
+                            <Link to={{pathname: '/catalog/' + game.id, games: this.state.games}}><td>{game.name}</td></Link>
                             <td onClick={() => this.handleGameElementClick(game)}>{game.rating} stars</td>
                             <td>
                               <button onClick={() => this.handleGameDeleteClick(game)}>
@@ -335,6 +338,31 @@ MODAL
             </div>
           </div>
       </div>
+    )
+  }
+}
+
+class Game extends Component {
+  constructor(props) {
+    super(props);
+    const { gameId } = this.props.match.params;
+    const { games } = this.props.location;
+    this.game = games.find(game => game.id == gameId)
+  }
+  
+  render() {
+    return (
+    <section class="content">
+      <div class="container mt-4">
+          <div class="card text-white bg-dark mb-3">
+              <div class="col-md-8">
+                  <div class="card-body">
+                      <p class="card-text">{this.game.name}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
     )
   }
 }
