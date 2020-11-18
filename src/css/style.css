@@ -42,7 +42,7 @@ nav {
 #records {
     margin-top: 10px;
 }
-section {
+.section {
     border-radius: 25px;
     background: #404040;
     color: white;
@@ -54,7 +54,7 @@ section {
     max-width: 500px;
 
 }
-section h3 {
+.section h3 {
     text-align: center;
 }
 .aboutinfo {
