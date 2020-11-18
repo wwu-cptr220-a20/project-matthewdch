@@ -1,7 +1,7 @@
 html {
     height: 100%;
 }
-body{
+body {
     
     background: radial-gradient(rgb(53, 51, 51), #363636);
 }
@@ -15,7 +15,7 @@ body{
         
     }
 }
-header{
+header {
     background-color: rgb(204, 240, 243);
     margin: 0;
     color: Black;
@@ -34,7 +34,7 @@ header h1 {
     display: inline-block;
     margin: 0 0 0 20px;
 }
-nav{  
+nav {  
     padding-top: 5px;   
     float: right;
  }
@@ -42,7 +42,7 @@ nav{
 #records {
     margin-top: 10px;
 }
-section{
+section {
     border-radius: 25px;
     background: #404040;
     color: white;
@@ -86,12 +86,12 @@ thead th {
     background-color: #d3d3d3;
 }
 
-tbody tr{
+tbody tr {
     background-color: #eee;
 
 }
 
-tbody tr:hover{
+tbody tr:hover {
     background-color: pink;
 }
 
@@ -99,7 +99,7 @@ tbody tr:hover{
     width: 100px;
     height: 100px;
 }
-.fa-trash-o{
+.fa-trash-o {
     font-size:28px;
 }
 .form-group {
