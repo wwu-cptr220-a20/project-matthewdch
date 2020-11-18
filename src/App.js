@@ -43,7 +43,7 @@ export default class App extends Component {
 class Home extends Component {
   render() {
     return (
-      <main>
+      <div>
         <section>
           <h3>Topic Overview</h3>
           <p>This project serves to be able to keep track of your board games.
@@ -66,7 +66,7 @@ class Home extends Component {
             <li><a href= "https://www.creativebloq.com/features/best-html-apis">Other maybe useful apis</a></li>
           </ul>
         </section>
-      </main>
+      </div>
     )
   }
 }
@@ -74,10 +74,10 @@ class Home extends Component {
 class About extends Component {
   render() {
     return (
-      <main>
+      <div>
           <section>
             <h3>About</h3>
-              <p class="About info">
+              <p className="About info">
                 This is a project by Matthew DeChance for CPTR220 at Walla Walla University. The project will be creatign a virtual game shelf to catalog a persons board game colection. The user will be able to organize and interact with the data to rate, make notes, and track stats for each game they own. Work in progress as of 10/7/20.
               </p>
           </section>
@@ -86,16 +86,16 @@ class About extends Component {
               <p>
                Have you ever wondered if a storm will clear up soon, or if it will actually rain today? As soon as you want to do something the weather flips. Check the integrated weather widget to see what the forecast will be before starting that game of monopoly.
               </p>
-              <img class="weather" src="img/weather.png" alt="weather widget"></img>
+              <img className="weather" src="img/weather.png" alt="weather widget"></img>
           </section>
           <section>
             <h3 id="Stats">Stat Tracking</h3>
               <p>
               If you think you cant be beat at your favorite game, but have no way to prove it, fear not! Now you can input your wins and losses for each game into this and you will get a comparison of how often you win. Show off to your friends and prove to them that you <del>have no life.</del> <del>are better than them.</del> <ins> should go pro!</ins>
               </p>
-              <img class="stats" src="img/graph.jpg" alt="win/loss stats graph"></img>
+              <img className="stats" src="img/graph.jpg" alt="win/loss stats graph"></img>
           </section>
-      </main>
+      </div>
     )
   }
 }
@@ -213,7 +213,7 @@ MODAL
 
   render() {
     return (
-      <main>
+      <div>
         <section className="content">
             <div className="container mt-4 mb-4">
                 <label for="boardGameInput">Enter a board game</label>
@@ -316,7 +316,7 @@ MODAL
               </div>
             </div>
           </div>
-      </main>
+      </div>
     )
   }
 }
