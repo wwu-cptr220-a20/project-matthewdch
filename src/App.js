@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
@@ -10,7 +10,7 @@ import {
 export default class App extends Component {
   render () {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL+'/'}>
         <div>
           <header>
             <h1>The Game Shelf</h1>
@@ -27,9 +27,9 @@ export default class App extends Component {
             </nav>
            </header>
           <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/info" exact component={About} />
-            <Route path="/catalog" exact component={Catalog} />
+            <Route path="/" component={Home}/>
+            <Route path="/info" component={About} />
+            <Route path="/catalog" component={Catalog} />
           </Switch>
         </div>
         <footer>
