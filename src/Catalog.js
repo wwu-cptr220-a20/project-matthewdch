@@ -108,6 +108,11 @@ export default class Catalog extends Component {
                   Click on the search button to bring up the search box.
                 </p>
               </li>
+              <li>
+                <p>
+                  Click on the name of the game to bring up more information about it.
+                </p>
+              </li>
             </ul>
           </div>
         </section>
