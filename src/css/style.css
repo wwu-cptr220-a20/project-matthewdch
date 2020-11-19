@@ -28,7 +28,6 @@ footer {
     display: block;
     position: fixed;
     bottom: 0;
-    right: 0;
     margin: auto;
 }
 
@@ -42,6 +41,15 @@ nav {
 
  }
 
+ nav button {
+     margin: 5px;
+     
+ }
+
+ .btn-dark {
+     background: black;
+ }
+
 #records {
     margin-top: 10px;
 }
@@ -50,7 +58,7 @@ section {
     background: black;
     color: white;
     padding: 20px;
-    margin-right: auto;
+    margin: auto;
     margin-top: 20px;
     margin-bottom: 5px;
     /* opacity: 90%; */
