@@ -378,9 +378,13 @@ class GameBookmark extends Component {
       uploadedImage: createRef(null),
       gameTitle: '',
       gameComments: '',
+      gameArr: []
     }
 
     this.submitData = this.submitData.bind(this);
+    this.handleComment = this.handleComment.bind(this);
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
   }
 
   handleImageUpload(e) {
@@ -397,11 +401,19 @@ class GameBookmark extends Component {
   }
 
   submitData() {
-    this.setState({
-      gameTitle: this.element.value,
-      gameComments: this.element2.value,
+    this.state.gameArr.push(<GameCard key={this.state.gameTitle} gameTitle={this.state.gameTitle} gameComments={this.state.gameComments}/>);
+    this.setState( {
+      gameArr: this.state.gameArr
+    })
+    console.log(this.state.gameArr);
+  }
 
-    });
+  handleTitle(event) {
+    this.setState({gameTitle: event.target.value})
+  }
+
+  handleComment(event) {
+    this.setState({gameComments: event.target.value})
   }
 
   render() {
@@ -413,25 +425,33 @@ class GameBookmark extends Component {
             <form onSubmit={this.submitData}>
               <div className="form-group">
                 <label for="boardName">Board Game Title:</label><br />
-                <input ref={el => this.element = el} class="form-control inputs" type="text"></input><br />
+                <input onChange={this.handleTitle} class="form-control inputs" type="text"></input><br />
                 <label for="boardName">How the game left off:</label><br />
-                <textarea ref={el => this.element2 = el} class="form-control inputs" type="text"></textarea><br />
+                <textarea onChange={this.handleComment} class="form-control inputs" type="text"></textarea><br />
                 <label for="boardName">Upload a picture of the board:</label><br />
                 <input class="inputs upload" type="file" accept="image/*" multiple="false" onChange={(e) => this.handleImageUpload(e)} />
                 <input type="submit" value="Submit Game Data" class="btn btn-primary"></input>
               </div>
             </form>
           </div>
-          <div class="row text-white bg-dark mb-3">
-            <div class="card-body flex">
-              <h3 class="cards-text left">{this.state.gameTitle}</h3>
-              <p class="cards-text">{this.state.gameComments}</p>
-            </div>
-            <img class="card-img-top game_photo flex" alt="" ref={this.state.uploadedImage} />
-          </div>
+          <img ref={this.state.uploadedImage}/>
+        {<div>{this.state.gameArr}</div>}
         </div>
       </section>
     )
   }
 }
 
+class GameCard extends Component {
+  render() {
+    return (
+      <div class="row text-white bg-dark mb-3">
+            <div class="card-body flex">
+              <h3 class="cards-text left">{this.props.gameTitle}</h3>
+              <p class="cards-text">{this.props.gameComments}</p>
+            </div>
+            <img class="card-img-top game_photo flex" alt="" ref={this.props.img} />
+      </div>
+    )
+  }
+}
