@@ -374,7 +374,11 @@ class GameBookmark extends Component {
     super(props);
     this.state = {
       uploadedImage: createRef(null),
+      gameTitle: '',
+      gameComments: '',
     }
+
+    this.submitData = this.submitData.bind(this);
   }
 
   handleImageUpload(e) {
@@ -390,20 +394,44 @@ class GameBookmark extends Component {
     }
   }
 
+  submitData() {
+    this.setState( {
+      gameTitle: this.element.value,
+      gameComments: this.element2.value,
+      
+    });
+  }
+
   render() {
     return (
       <section class="content">
-          <input type="file" accept="image/*" multiple="false" onChange={(e) => this.handleImageUpload(e)}/>
+          
           <div class="container mt-4">
-              <div class="card text-white bg-dark mb-3">
-                  <div class="col-md-3">
-                      <img class="card-img-top" alt="" ref={this.state.uploadedImage}/>
-                  </div>
-                  <div class="col-md-8">
-                      <div class="card-body">
-                          <p class="card-text">Secret Hitler</p>
+              <div class="card text-white bg-secondary mb-4">
+                  <form onSubmit={this.submitData}>
+                    <div className="form-group">
+                    <label for="boardName">Board Game Title:</label><br/>
+                    <input ref={el => this.element = el} class="form-control inputs" type="text"></input><br />
+                    <label for="boardName">How the game left off:</label><br/>
+                    <textarea ref={el => this.element2 = el} class="form-control inputs" type="text"></textarea><br />
+                    <label for="boardName">Upload a picture of the board:</label><br/>
+                    <input class="inputs upload" type="file" accept="image/*" multiple="false" onChange={(e) => this.handleImageUpload(e)}/>
+                    <input type="submit" value="Submit Game Data" class="btn btn-primary"></input>
+                    </div>
+                  </form>
+              </div>
+              <div class="row text-white bg-dark mb-3">
+                  
+                  
+                      <div class="card-body flex">
+                        
+                        <h3 class="cards-text left">{this.state.gameTitle}</h3>
+                        <p class="cards-text">{this.state.gameComments}</p>
+                        
+                            
                       </div>
-                  </div>
+                      <img class="card-img-top game_photo flex" alt="" ref={this.state.uploadedImage}/>
+                  
               </div>
           </div>
       </section>
