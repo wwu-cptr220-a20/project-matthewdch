@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class Catalog extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       games: [
@@ -15,7 +15,9 @@ export default class Catalog extends Component {
       inputText: '',
     }
 
-    this.addSearchSelectionToCollection = this.addSearchSelectionToCollection.bind(this)
+    this.addSearchSelectionToCollection = this.addSearchSelectionToCollection.bind(this);
+    this.handleGameDeleteClick = this.handleGameDeleteClick.bind(this);
+    this.handleGameElementClick = this.handleGameElementClick.bind(this);
   }
 
   handleGameDeleteClick(game) {
@@ -84,22 +86,7 @@ export default class Catalog extends Component {
           </div>
           <div className="container mt-4 mb-4">
             <table className="table table-dark">
-              <tbody id="game-list">
-                {
-                  this.state.games.map((game) =>
-                    <tr>
-                      <th scope="row" className="text-dark">{game.id}</th>
-                      <Link to={{ pathname: '/catalog/' + game.id, games: this.state.games }}><td>{game.name}</td></Link>
-                      <td onClick={() => this.handleGameElementClick(game)}>{game.rating} stars</td>
-                      <td>
-                        <button onClick={() => this.handleGameDeleteClick(game)}>
-                          <i className="fa fa-trash-o" />
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                }
-              </tbody>
+              <GameList games={this.state.games} handleGameElementClickCallback={this.handleGameElementClick} handleGameDeleteClickCallback={this.handleGameDeleteClick} />
             </table>
           </div>
           <div className="container mt-4 mb-4">
@@ -125,9 +112,31 @@ export default class Catalog extends Component {
           </div>
         </section>
         <div className="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-          <SearchModal addSelectedSearchResultCallback={this.addSearchSelectionToCollection}/>
+          <SearchModal addSelectedSearchResultCallback={this.addSearchSelectionToCollection} />
         </div>
       </div>
+    )
+  }
+}
+class GameList extends Component {
+  render() {
+    return (
+      <tbody id="game-list">
+        {
+          this.props.games.map((game) =>
+            <tr>
+              <th scope="row" className="text-dark">{game.id}</th>
+              <Link to={{ pathname: '/catalog/' + game.id, games: this.props.games }}><td>{game.name}</td></Link>
+              <td onClick={() => this.props.handleGameElementClickCallback(game)}>{game.rating} stars</td>
+              <td>
+                <button onClick={() => this.props.handleGameDeleteClickCallback(game)}>
+                  <i className="fa fa-trash-o" />
+                </button>
+              </td>
+            </tr>
+          )
+        }
+      </tbody>
     )
   }
 }
@@ -213,7 +222,9 @@ class SearchModal extends Component {
                   {
 
                     this.state.awaitingResults ?
-                      {} : this.state.searchResults.map((game) => {
+                     <tr>
+                       Waiting...
+                     </tr> : this.state.searchResults.map((game) => {
                         return (
                           <tr>
                             <th scope="row">{game.id}</th>
