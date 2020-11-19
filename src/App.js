@@ -53,7 +53,7 @@ class Game extends Component {
     super(props);
     const { gameId } = this.props.match.params;
     const { games } = this.props.location;
-    this.game = games.find(game => game.id == gameId)
+    this.game = games.find(game => game.id === gameId)
   }
   
   render() {
