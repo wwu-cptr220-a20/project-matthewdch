@@ -7,7 +7,7 @@ body {
 }
 @media (min-width: 1000px) {
     body {
-        background: linear-gradient(#ffffff00, #363636), url("../img/background.jpg");
+        background: linear-gradient(#ffffff00, #363636), url("../img/game\ pieces.jpg");
         /*IMG from https://www.boardgamehalv.com/settlers-of-catan-review/*/
         background-position: center;
         background-size: cover;
@@ -16,10 +16,10 @@ body {
     }
 }
 header {
-    background-color: rgb(204, 240, 243);
+    background-color: rgb(110, 26, 26);
     margin: 0;
     color: Black;
-    padding: 5px;
+    padding: 10px;
 }
 
 footer {
@@ -44,7 +44,7 @@ nav {
 }
 section {
     border-radius: 25px;
-    background: #404040;
+    background: black;
     color: white;
     padding: 10px;
     margin: auto;
@@ -95,7 +95,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: pink;
+    background-color: rgb(114, 21, 21);
 }
 
 .game_photo {

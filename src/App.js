@@ -83,7 +83,7 @@ class About extends Component {
           <section>
             <h3>About</h3>
               <p className="About info">
-                This is a project by Matthew DeChance for CPTR220 at Walla Walla University. The project will be creatign a virtual game shelf to catalog a persons board game colection. The user will be able to organize and interact with the data to rate, make notes, and track stats for each game they own. Work in progress as of 10/7/20.
+                This is a project by Matthew DeChance for CPTR220 at Walla Walla University. The project will be creating a virtual game shelf to catalog a person's board game collection. The user will be able to organize and interact with the data to rate, make notes, and track stats for each game they own. Work in progress as of 10/7/20.
               </p>
           </section>
           <section>
@@ -347,7 +347,7 @@ class Game extends Component {
     super(props);
     const { gameId } = this.props.match.params;
     const { games } = this.props.location;
-    this.game = games.find(game => game.id == gameId)
+    this.game = games.find(game => game.id === gameId)
   }
   
   render() {
