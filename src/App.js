@@ -89,8 +89,18 @@ class GameBookmark extends Component {
     this.handleComment = this.handleComment.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.uploadSingleFile = this.uploadSingleFile.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
+  delete(name) {
+      let tempEl = this.state.gameArr.find((element) => element.props.gameTitle === name)
+      console.log(tempEl);
+      var index = this.state.gameArr.indexOf(tempEl);
+      this.state.gameArr[index] = (<div />);
+      this.setState( {
+        gameArr: this.state.gameArr
+      })
+  }
 
   uploadSingleFile(e) {
     this.setState({
@@ -99,7 +109,7 @@ class GameBookmark extends Component {
 }
 
   submitData() {
-    this.state.gameArr.push(<GameCard key={this.state.gameTitle} gameTitle={this.state.gameTitle} gameComments={this.state.gameComments} img={this.state.fileURL}/>);
+    this.state.gameArr.push(<GameCard key={this.state.gameTitle} gameTitle={this.state.gameTitle} gameComments={this.state.gameComments} img={this.state.fileURL} delete={this.delete}/>);
     this.setState( {
       gameArr: this.state.gameArr
     })
@@ -141,12 +151,15 @@ class GameBookmark extends Component {
 class GameCard extends Component {
   render() {
     return (
+      <div className="pad">
       <div class="row text-white bg-dark mb-3">
             <div class="card-body flex">
               <h3 class="cards-text left">{this.props.gameTitle}</h3>
               <p class="cards-text">{this.props.gameComments}</p>
             </div>
             <img class="card-img-top game_photo flex" alt="" src={this.props.img} />
+      </div>
+      <button class="btn btn-primary" onClick={() => {this.props.delete(this.props.gameTitle)}}>Delete</button>
       </div>
     )
   }

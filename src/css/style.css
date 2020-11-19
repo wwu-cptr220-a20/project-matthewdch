@@ -151,3 +151,7 @@ tbody tr:hover {
     text-align: start;
     color: khaki;
 }
+
+.pad {
+    margin-top: 3%;
+}
