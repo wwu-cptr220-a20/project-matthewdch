@@ -375,37 +375,30 @@ class GameBookmark extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploadedImage: createRef(null),
       gameTitle: '',
       gameComments: '',
-      gameArr: []
+      gameArr: [],
+      fileURL: null,
     }
 
     this.submitData = this.submitData.bind(this);
     this.handleComment = this.handleComment.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
-    this.handleImageUpload = this.handleImageUpload.bind(this);
+    this.uploadSingleFile = this.uploadSingleFile.bind(this);
   }
 
-  handleImageUpload(e) {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = this.state.uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      }
-      reader.readAsDataURL(file);
-    }
-  }
+
+  uploadSingleFile(e) {
+    this.setState({
+      fileURL: URL.createObjectURL(e.target.files[0])
+    })
+}
 
   submitData() {
-    this.state.gameArr.push(<GameCard key={this.state.gameTitle} gameTitle={this.state.gameTitle} gameComments={this.state.gameComments}/>);
+    this.state.gameArr.push(<GameCard key={this.state.gameTitle} gameTitle={this.state.gameTitle} gameComments={this.state.gameComments} img={this.state.fileURL}/>);
     this.setState( {
       gameArr: this.state.gameArr
     })
-    console.log(this.state.gameArr);
   }
 
   handleTitle(event) {
@@ -429,12 +422,11 @@ class GameBookmark extends Component {
                 <label for="boardName">How the game left off:</label><br />
                 <textarea onChange={this.handleComment} class="form-control inputs" type="text"></textarea><br />
                 <label for="boardName">Upload a picture of the board:</label><br />
-                <input class="inputs upload" type="file" accept="image/*" multiple="false" onChange={(e) => this.handleImageUpload(e)} />
+                <input class="inputs upload" type="file" accept="image/*" multiple="false" onChange={(e) => this.uploadSingleFile(e)} />
                 <input type="submit" value="Submit Game Data" class="btn btn-primary"></input>
               </div>
             </form>
           </div>
-          <img ref={this.state.uploadedImage}/>
         {<div>{this.state.gameArr}</div>}
         </div>
       </section>
@@ -450,7 +442,7 @@ class GameCard extends Component {
               <h3 class="cards-text left">{this.props.gameTitle}</h3>
               <p class="cards-text">{this.props.gameComments}</p>
             </div>
-            <img class="card-img-top game_photo flex" alt="" ref={this.props.img} />
+            <img class="card-img-top game_photo flex" alt="" src={this.props.img} />
       </div>
     )
   }
