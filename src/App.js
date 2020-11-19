@@ -1,4 +1,7 @@
 import React, { Component, createRef } from 'react';
+import Home from './Home.js';
+import About from './About.js';
+import Catalog from './Catalog.js';
 import './css/style.css';
 import {
   HashRouter as Router,
@@ -45,6 +48,7 @@ export default class App extends Component {
   }
 }
 
+<<<<<<< HEAD
 class Home extends Component {
   render() {
     return (
@@ -342,6 +346,8 @@ MODAL
   }
 }
 
+=======
+>>>>>>> e5eb041b2a2a6e1d59c70273731e86454cb280d9
 class Game extends Component {
   constructor(props) {
     super(props);
