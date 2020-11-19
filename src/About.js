@@ -7,22 +7,29 @@ export default class About extends Component {
             <section>
               <h3>About</h3>
                 <p className="About info">
-                  This is a project by Matthew DeChance for CPTR220 at Walla Walla University. The project will be creatign a virtual game shelf to catalog a persons board game colection. The user will be able to organize and interact with the data to rate, make notes, and track stats for each game they own. Work in progress as of 10/7/20.
+                  This is a project by Matthew DeChance, Garrett Moody, Grace Morales, Theo Moen, Will Hensel 
+                  for CPTR220 at Walla Walla University. The project will be creatign a virtual game shelf to 
+                  catalog a persons board game colection. The user will be able to add, organize, interact with 
+                  the games to rate, each game they own. This app will also 
+                  allow users to save their progress in the longer games. Final Version (11/18/20).
                 </p>
             </section>
             <section>
-              <h3>Weather Info</h3>
+              <h3>Cataloging</h3>
                 <p>
-                 Have you ever wondered if a storm will clear up soon, or if it will actually rain today? As soon as you want to do something the weather flips. Check the integrated weather widget to see what the forecast will be before starting that game of monopoly.
+                  Take every game you own and add it to the catalog. You can then rate
+                   the games based on how much you enjoy them. No one else can tell you 
+                   that risk is a terrible game because its rated at a 5 on the website.
                 </p>
-                <img className="weather" src="img/weather.png" alt="weather widget"></img>
             </section>
             <section>
-              <h3 id="Stats">Stat Tracking</h3>
+              <h3 id="Saving">Saving</h3>
                 <p>
-                If you think you cant be beat at your favorite game, but have no way to prove it, fear not! Now you can input your wins and losses for each game into this and you will get a comparison of how often you win. Show off to your friends and prove to them that you <del>have no life.</del> <del>are better than them.</del> <ins> should go pro!</ins>
+                  If you have ever spent multiple days playing monopoly, or spent 2 weeks 
+                  trying to delay the inevitable in risk; then this will help by allowing 
+                  you to upload a photo of your current game to set it up later. It also 
+                  helps counter one of the players tampering with the board game.
                 </p>
-                <img className="stats" src="img/graph.jpg" alt="win/loss stats graph"></img>
             </section>
         </div>
       )
