@@ -116,6 +116,7 @@ export default class Catalog extends Component {
                 </p>
               </li>
             </ul>
+            <p> Search functionality provided by <a href="https://www.boardgameatlas.com/api/docs">Board Game Atlas</a></p>
           </div>
         </section>
         <div className="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
