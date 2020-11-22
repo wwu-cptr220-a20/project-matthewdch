@@ -130,8 +130,8 @@ class GameList extends Component {
         {
           this.props.games.map((game) =>
             <tr>
-              <th scope="row" className="text-dark">{game.id}</th>
-              <Link to={{ pathname: '/catalog/' + game.id, games: this.props.games }}><td>{game.name}</td></Link>
+              <th scope="row">{game.id}</th>
+              <td ><Link id="link-text" to={{ pathname: '/catalog/' + game.id, games: this.props.games }}>{game.name}</Link></td>
               <td onClick={() => this.props.handleGameElementClickCallback(game)}>{game.rating} stars</td>
               <td>
                 <button onClick={() => this.props.handleGameDeleteClickCallback(game)}>

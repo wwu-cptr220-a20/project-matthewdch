@@ -53,17 +53,19 @@ class Game extends Component {
     super(props);
     const { gameId } = this.props.match.params;
     const { games } = this.props.location;
-    this.game = games.find(game => game.id === gameId)
+    this.game = games.find(game => game.id == gameId)
   }
 
   render() {
     return (
       <section class="content">
-        <div class="container mt-4">
-          <div class="card text-white bg-dark mb-3">
+        <div id="menu-background" class="container mt-4">
+          <div id="catalog-game-menu" class="card text-white bg-dark border-light mb-3">
             <div class="col-md-8">
               <div class="card-body">
-                <p class="card-text">{this.game.name}</p>
+                <h1 class="card-title">{this.game.name}</h1>
+                <p class="card-text">{this.game.description}</p>
+                <p class="card-text">Rating: {this.game.rating} Stars</p>
               </div>
             </div>
           </div>

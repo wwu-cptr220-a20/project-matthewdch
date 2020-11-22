@@ -78,7 +78,7 @@ img{
     padding-left: 10px;
     padding-bottom: 10px;
 }
-
+/*
 table {
     width: 50%;
     margin-left: auto;
@@ -110,7 +110,14 @@ tbody tr {
 tbody tr:hover {
     background-color: rgb(114, 21, 21);
 }
-
+*/
+#link-text {
+    color: white;
+}
+#catalog-game-menu, #menu-background{
+    width: 100%;
+    align-items: center;
+}
 .game_photo {
     width: 100px;
     height: 100px;
