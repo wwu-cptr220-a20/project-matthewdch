@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+// Renders the catalog page
 export default class Catalog extends Component {
 
   constructor(props) {
@@ -62,6 +63,7 @@ export default class Catalog extends Component {
         games.push({
           id: games.length + 1,
           name: game.name,
+          description: game.description,
           rating: 0
         });
       }
@@ -146,6 +148,8 @@ class GameList extends Component {
   }
 }
 
+
+// Renders the search popup box
 class SearchModal extends Component {
 
   constructor(props) {

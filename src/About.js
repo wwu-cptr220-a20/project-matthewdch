@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// Renders the about page
 export default class About extends Component {
   render() {
     return (
